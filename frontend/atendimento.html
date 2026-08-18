@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Atendimento - Sistema Hospitalar</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background:
+        radial-gradient(circle at 10% 15%, #ffd6e5 0 50px, transparent 51px),
+        radial-gradient(circle at 90% 12%, #ffc4d8 0 60px, transparent 61px),
+        radial-gradient(circle at 90% 90%, #ffe1ec 0 60px, transparent 61px),
+        linear-gradient(135deg, #fff0f6, #ffdce9);
+
+      color: #87415e;
+    }
+
+    body::before {
+      content: "🌸  ♡  🧸  ♡  🌸";
+
+      position: fixed;
+      top: 20px;
+      left: 25px;
+
+      font-size: 25px;
+      color: #df7fa2;
+      letter-spacing: 7px;
+    }
+
+    body::after {
+      content: "♡  🩺  ♡  🌸  ♡";
+
+      position: fixed;
+      bottom: 20px;
+      right: 25px;
+
+      font-size: 25px;
+      color: #df7fa2;
+    }
+
+
+    /* CAIXA PRINCIPAL */
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+
+      padding: 35px;
+
+      background: #fffafb;
+
+      border: 5px solid #f3a7c1;
+      border-radius: 32px;
+
+      box-shadow:
+        0 10px 0 #df7fa2,
+        0 18px 35px rgba(190, 100, 130, 0.25);
+
+      position: relative;
+    }
+
+
+    /* URSINHO */
+
+    .container::before {
+      content: "🧸";
+
+      position: absolute;
+
+      top: -48px;
+      left: 30px;
+
+      width: 65px;
+      height: 65px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: #ffd1df;
+
+      border: 4px solid #ee91b0;
+      border-radius: 50%;
+
+      font-size: 38px;
+
+      box-shadow: 0 5px 0 #d9799b;
+    }
+
+
+    /* TÍTULO */
+
+    h2 {
+      text-align: center;
+
+      color: #d85c89;
+
+      font-size: 30px;
+
+      margin: 0 0 25px;
+
+      text-shadow: 2px 2px 0 #ffd5e3;
+    }
+
+
+    /* CAMPOS */
+
+    input,
+    select {
+
+      width: 100%;
+
+      padding: 14px 16px;
+
+      margin-bottom: 16px;
+
+      background: white;
+
+      color: #87415e;
+
+      border: 3px solid #f3b2c9;
+
+      border-radius: 17px;
+
+      font-size: 15px;
+
+      outline: none;
+
+      box-shadow: 0 4px 0 #f7d5e1;
+
+      transition: 0.2s;
+    }
+
+    input::placeholder {
+      color: #c994a9;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #ed7fa5;
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 6px 0 #f2c1d2;
+    }
+
+
+    /* CAMPO DE FOTO */
+
+    input[type="file"] {
+      background: #fff0f6;
+
+      padding: 12px;
+
+      cursor: pointer;
+    }
+
+
+    /* BOTÃO */
+
+    button {
+
+      width: 100%;
+
+      padding: 16px;
+
+      background: #f58caf;
+
+      color: white;
+
+      border: 4px solid #dc6d93;
+
+      border-radius: 18px;
+
+      font-size: 18px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      box-shadow: 0 6px 0 #bf5278;
+
+      transition: 0.15s;
+    }
+
+    button:hover {
+      background: #f79bb9;
+
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(4px);
+
+      box-shadow: 0 2px 0 #bf5278;
+    }
+
+
+    /* RESPONSIVO */
+
+    @media (max-width: 600px) {
+
+      .container {
+        width: 94%;
+        padding: 28px 20px;
+      }
+
+      h2 {
+        font-size: 25px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="container">
+
+    <h2>
+      🏥 Atendimento
+    </h2>
+
+
+    <input
+      id="nome"
+      placeholder="👤 Nome"
+    >
+
+
+    <input
+      id="cpf"
+      placeholder="🪪 CPF"
+    >
+
+
+    <select id="tipo">
+
+      <option>
+        Convenio
+      </option>
+
+      <option>
+        Particular
+      </option>
+
+    </select>
+
+
+    <input
+      type="file"
+      id="foto"
+    >
+
+
+    <button onclick="cadastrar()">
+      🌸 Cadastrar
+    </button>
+
+  </div>
+
+
+  <script>
+
+    function cadastrar() {
+
+      fetch("http://localhost:3000/atendimento", {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+          nome: nome.value,
+
+          cpf: cpf.value,
+
+          tipo: tipo.value
+
+        })
+
+      });
+
+      alert(
+        "💗 Paciente enviado para triagem!"
+      );
+
+    }
+
+  </script>
+
+</body>
+
+</html>

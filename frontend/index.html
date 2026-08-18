@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sistema Hospitalar</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background:
+        radial-gradient(circle at 15% 20%, #ffd6e5 0 45px, transparent 46px),
+        radial-gradient(circle at 85% 15%, #ffc4d8 0 55px, transparent 56px),
+        radial-gradient(circle at 80% 85%, #ffe1ec 0 50px, transparent 51px),
+        linear-gradient(135deg, #fff0f6, #ffdce9);
+
+      overflow: hidden;
+    }
+
+    /* Decoração do fundo */
+    body::before {
+      content: "♡  ✿  ♡  ✿  ♡";
+      position: fixed;
+      top: 35px;
+      left: 35px;
+      color: #f39ab9;
+      font-size: 28px;
+      letter-spacing: 12px;
+    }
+
+    body::after {
+      content: "🌸  ♡  🌸";
+      position: fixed;
+      bottom: 35px;
+      right: 35px;
+      font-size: 28px;
+    }
+
+    /* Caixa principal */
+    .container {
+      width: 390px;
+      padding: 42px 32px 30px;
+
+      background: #fffafb;
+
+      border: 5px solid #f3a7c1;
+      border-radius: 35px;
+
+      text-align: center;
+
+      box-shadow:
+        0 10px 0 #df7fa2,
+        0 18px 35px rgba(190, 100, 130, 0.25);
+
+      position: relative;
+    }
+
+    /* Ursinho */
+    .brinquedo {
+      position: absolute;
+      top: -55px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 75px;
+      height: 75px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #ffd1df;
+      border: 4px solid #ee91b0;
+      border-radius: 50%;
+
+      font-size: 45px;
+
+      box-shadow: 0 6px 0 #d9799b;
+    }
+
+    /* Título */
+    h2 {
+      color: #d85c89;
+      font-size: 27px;
+      margin-bottom: 28px;
+
+      text-shadow: 2px 2px 0 #ffd5e3;
+    }
+
+    /* Campos */
+    input {
+      width: 100%;
+      padding: 15px 18px;
+      margin-bottom: 17px;
+
+      background: #fff7fa;
+
+      border: 3px solid #f3b2c9;
+      border-radius: 18px;
+
+      outline: none;
+
+      color: #a84970;
+      font-size: 16px;
+
+      box-shadow: 0 5px 0 #f7d5e1;
+
+      transition: 0.2s;
+    }
+
+    input::placeholder {
+      color: #c994a9;
+    }
+
+    input:focus {
+      border-color: #ed7fa5;
+      background: #fff;
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 7px 0 #f2c1d2;
+    }
+
+    /* Botão */
+    button {
+      width: 100%;
+      padding: 16px;
+      margin-top: 5px;
+
+      background: #f58caf;
+      color: white;
+
+      border: 4px solid #dc6d93;
+      border-radius: 20px;
+
+      font-size: 19px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      box-shadow: 0 7px 0 #bf5278;
+
+      transition: 0.15s;
+    }
+
+    button:hover {
+      background: #f79bb9;
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 9px 0 #bf5278;
+    }
+
+    button:active {
+      transform: translateY(5px);
+      box-shadow: 0 2px 0 #bf5278;
+    }
+
+    /* Decoração */
+    .decoracao {
+      margin-top: 23px;
+      font-size: 21px;
+      letter-spacing: 5px;
+    }
+
+    /* Celular */
+    @media (max-width: 450px) {
+      .container {
+        width: 90%;
+        padding: 40px 24px 28px;
+      }
+
+      h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="brinquedo">
+      🧸
+    </div>
+
+    <h2>🏥 Nanda & Tay</h2>
+
+    <input
+      id="usuario"
+      placeholder="Usuário"
+      autocomplete="username"
+    >
+
+    <input
+      id="senha"
+      type="password"
+      placeholder="Senha"
+      autocomplete="current-password"
+    >
+
+    <button onclick="login()">
+      Entrar 💗
+    </button>
+
+    <div class="decoracao">
+      🌸 💗 🩺 💗 🌸
+    </div>
+
+  </div>
+
+  <script>
+    function login() {
+
+      fetch("http://localhost:3000/login", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          usuario: document.getElementById("usuario").value,
+          senha: document.getElementById("senha").value
+        })
+      })
+
+      .then(r => r.json())
+
+      .then(data => {
+
+        if (data.tipo === "triagem") {
+          location.href = "triagem.html";
+        }
+
+        if (data.tipo === "medico") {
+          location.href = "medico.html";
+        }
+
+        if (data.tipo === "atendimento") {
+          location.href = "atendimento.html";
+        }
+
+      })
+
+      .catch(error => {
+        console.error("Erro no login:", error);
+        alert("Não foi possível conectar ao servidor.");
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mídia Indoor - TV</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+
+    /* =========================================
+       FUNDO
+       ========================================= */
+
+    body {
+
+      background:
+        radial-gradient(circle at 8% 12%, #ffd6e5 0 65px, transparent 66px),
+        radial-gradient(circle at 92% 15%, #ffc4d8 0 80px, transparent 81px),
+        radial-gradient(circle at 85% 90%, #ffe1ec 0 75px, transparent 76px),
+        linear-gradient(
+          135deg,
+          #fff0f6,
+          #ffdce9,
+          #ffe9f1
+        );
+
+      min-height: 100vh;
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      overflow: hidden;
+
+      color: #87415e;
+    }
+
+
+    /* Decorações */
+
+    body::before {
+
+      content: "🌸  ♡  🩺  ♡  🌸  ♡  🧸";
+
+      position: fixed;
+
+      top: 18px;
+      left: 25px;
+
+      color: #df7fa2;
+
+      font-size: 25px;
+
+      letter-spacing: 8px;
+
+      opacity: .9;
+    }
+
+    body::after {
+
+      content: "♡  🌸  ♡  💗  ♡  🌸";
+
+      position: fixed;
+
+      bottom: 18px;
+      right: 25px;
+
+      font-size: 25px;
+
+      color: #df7fa2;
+    }
+
+
+    /* =========================================
+       TV
+       ========================================= */
+
+    .tv-container {
+
+      display: flex;
+
+      width: 95vw;
+
+      height: 90vh;
+
+      gap: 20px;
+    }
+
+
+    .left-panel {
+
+      display: flex;
+
+      flex-direction: column;
+
+      width: 35%;
+
+      gap: 20px;
+    }
+
+
+    .right-panel {
+
+      display: flex;
+
+      flex-direction: column;
+
+      width: 65%;
+
+      gap: 20px;
+    }
+
+
+    /* =========================================
+       CAIXAS
+       ========================================= */
+
+    .box {
+
+      background: #fffafb;
+
+      border: 6px solid #f3a7c1;
+
+      border-radius: 30px;
+
+      padding: 25px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      text-align: center;
+
+      box-shadow:
+        0 9px 0 #df7fa2,
+        0 15px 30px rgba(190, 100, 130, .25);
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+
+    /* Brilho decorativo */
+
+    .box::after {
+
+      content: "♡";
+
+      position: absolute;
+
+      top: 10px;
+
+      right: 18px;
+
+      font-size: 30px;
+
+      color: #f5bfd2;
+
+      opacity: .7;
+    }
+
+
+    .box-title {
+
+      color: #d85c89;
+
+      font-size: 2.2vw;
+
+      font-weight: bold;
+
+      text-transform: uppercase;
+
+      text-shadow:
+        2px 2px 0 #ffd5e3;
+
+      margin-bottom: 14px;
+    }
+
+
+    /* =========================================
+       LOCAL
+       ========================================= */
+
+    .local-box {
+
+      flex: 1;
+
+      background:
+        linear-gradient(
+          145deg,
+          #fffafb,
+          #ffeaf2
+        );
+    }
+
+
+    .local-number {
+
+      color: #e56b93;
+
+      font-size: 9vw;
+
+      font-weight: bold;
+
+      line-height: 1;
+
+      text-shadow:
+        4px 4px 0 #ffd1df;
+    }
+
+
+    .local-type {
+
+      color: #b45a79;
+
+      font-size: 1.8vw;
+
+      font-weight: bold;
+
+      margin-top: 8px;
+    }
+
+
+    /* =========================================
+       HISTÓRICO
+       ========================================= */
+
+    .history-box {
+
+      flex: 1;
+
+      justify-content: flex-start;
+
+      align-items: flex-start;
+
+      background: #fff7fa;
+
+    }
+
+
+    .history-box .box-title {
+
+      font-size: 1.8vw;
+
+      align-self: center;
+
+      margin-bottom: 20px;
+    }
+
+
+    #history-list {
+
+      list-style: none;
+
+      width: 100%;
+
+      color: #c8527c;
+
+      font-size: 1.5vw;
+
+      font-weight: bold;
+
+      text-align: left;
+    }
+
+
+    #history-list li {
+
+      margin-bottom: 10px;
+
+      background: #fff0f6;
+
+      border: 2px solid #f4c4d5;
+
+      border-radius: 12px;
+
+      padding: 9px 12px;
+
+      box-shadow:
+        0 3px 0 #f5d9e3;
+    }
+
+
+    /* =========================================
+       PACIENTE
+       ========================================= */
+
+    .patient-box {
+
+      flex: 3;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #ffffff,
+          #fff0f6
+        );
+    }
+
+
+    .patient-box .box-title {
+
+      font-size: 2.5vw;
+
+      margin-bottom: 25px;
+    }
+
+
+    .patient-name {
+
+      color: #df5f8b;
+
+      font-size: 6.5vw;
+
+      font-weight: bold;
+
+      line-height: 1.2;
+
+      word-break: break-word;
+
+      text-shadow:
+        4px 4px 0 #ffd1df;
+
+      max-width: 95%;
+    }
+
+
+    /* =========================================
+       LOGO
+       ========================================= */
+
+    .logo-box {
+
+      flex: 1;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffeaf2,
+          #ffd8e6
+        );
+    }
+
+
+    .logo-text {
+
+      color: #c8527c;
+
+      font-size: 3.5vw;
+
+      font-weight: bold;
+
+      text-transform: uppercase;
+
+      text-shadow:
+        2px 2px 0 white;
+    }
+
+
+    /* =========================================
+       ANIMAÇÃO DA CHAMADA
+       ========================================= */
+
+    @keyframes flash {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      25% {
+        opacity: .55;
+        transform: scale(1.02);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+
+      75% {
+        opacity: .65;
+        transform: scale(1.02);
+      }
+
+    }
+
+
+    .flash {
+
+      animation:
+        flash .5s ease 4;
+
+      border-color: #e95f8d;
+
+      box-shadow:
+        0 9px 0 #c94f77,
+        0 0 35px rgba(245, 104, 151, .7);
+    }
+
+
+    /* =========================================
+       RESPONSIVO
+       ========================================= */
+
+    @media (max-width: 700px) {
+
+      body {
+        overflow: auto;
+      }
+
+      .tv-container {
+
+        width: 95vw;
+
+        height: auto;
+
+        min-height: 95vh;
+
+        flex-direction: column;
+      }
+
+      .left-panel,
+      .right-panel {
+
+        width: 100%;
+      }
+
+      .local-number {
+        font-size: 22vw;
+      }
+
+      .local-type {
+        font-size: 5vw;
+      }
+
+      .box-title {
+        font-size: 6vw;
+      }
+
+      .history-box .box-title {
+        font-size: 5vw;
+      }
+
+      #history-list {
+        font-size: 4vw;
+      }
+
+      .patient-name {
+        font-size: 12vw;
+      }
+
+      .logo-text {
+        font-size: 7vw;
+      }
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       ESTRUTURA DA TV
+       ========================================= -->
+
+  <div class="tv-container">
+
+
+    <!-- =====================================
+         LADO ESQUERDO
+         ===================================== -->
+
+    <div class="left-panel">
+
+
+      <!-- LOCAL -->
+
+      <div class="box local-box">
+
+        <div class="box-title" id="local-tipo">
+          GUICHÊ
+        </div>
+
+        <div
+          class="local-number"
+          id="local-numero">
+
+          --
+
+        </div>
+
+        <div class="local-type">
+          📍 LOCAL DE ATENDIMENTO
+        </div>
+
+      </div>
+
+
+      <!-- HISTÓRICO -->
+
+      <div class="box history-box">
+
+        <div class="box-title">
+          ÚLTIMAS CHAMADAS
+        </div>
+
+        <ul id="history-list"></ul>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================
+         LADO DIREITO
+         ===================================== -->
+
+    <div class="right-panel">
+
+
+      <!-- PACIENTE -->
+
+      <div class="box patient-box">
+
+        <div class="box-title">
+          💗 PACIENTE
+        </div>
+
+        <div
+          class="patient-name"
+          id="patient-name">
+
+          AGUARDANDO...
+
+        </div>
+
+      </div>
+
+
+      <!-- LOGO -->
+
+      <div class="box logo-box">
+
+        <div class="logo-text">
+
+          🏥 Sistema Hospitalar
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <script>
+
+    let ultimoId = null;
+
+
+    /* =========================================
+       ATUALIZAR TV
+       ========================================= */
+
+    function atualizar() {
+
+      fetch("/tv/chamada")
+
+        .then(r => r.json())
+
+        .then(data => {
+
+          const chamada =
+            data.chamada;
+
+          const historico =
+            data.historico || [];
+
+
+          /* =====================================
+             CHAMADA ATUAL
+             ===================================== */
+
+          if (chamada) {
+
+            document.getElementById(
+              "local-tipo"
+            ).innerText =
+              chamada.localTipo ||
+              "GUICHÊ";
+
+
+            document.getElementById(
+              "local-numero"
+            ).innerText =
+              chamada.localNumero ||
+              "--";
+
+
+            document.getElementById(
+              "patient-name"
+            ).innerText =
+              chamada.paciente ||
+              "AGUARDANDO...";
+
+
+            /* =================================
+               FLASH PARA CHAMADA NOVA
+               ================================= */
+
+            if (
+              chamada.id !== ultimoId
+            ) {
+
+              ultimoId =
+                chamada.id;
+
+
+              const patientBox =
+                document.querySelector(
+                  ".patient-box"
+                );
+
+
+              patientBox.classList.remove(
+                "flash"
+              );
+
+
+              void patientBox.offsetWidth;
+
+
+              patientBox.classList.add(
+                "flash"
+              );
+
+            }
+
+          }
+
+
+          /* =====================================
+             HISTÓRICO
+             ===================================== */
+
+          const list =
+            document.getElementById(
+              "history-list"
+            );
+
+
+          list.innerHTML = "";
+
+
+          historico
+            .slice(0, 4)
+            .forEach(h => {
+
+              const li =
+                document.createElement(
+                  "li"
+                );
+
+
+              const tipo =
+                h.localTipo
+                  ? h.localTipo.substring(
+                      0,
+                      4
+                    )
+                  : "GUIC";
+
+
+              li.innerText =
+                `${tipo}. ${h.localNumero} - ${h.paciente}`;
+
+
+              list.appendChild(li);
+
+            });
+
+        })
+
+        .catch(err => {
+
+          console.log(
+            "Erro ao buscar chamada:",
+            err
+          );
+
+        });
+
+    }
+
+
+    /* Atualização inicial */
+
+    atualizar();
+
+
+    /* Atualiza a TV a cada 2 segundos */
+
+    setInterval(
+      atualizar,
+      2000
+    );
+
+  </script>
+
+
+</body>
+
+</html>
