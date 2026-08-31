@@ -2,316 +2,597 @@
 <html lang="pt-BR">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Atendimento Hospitalar</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 30px 15px;
+
+  background:
+    radial-gradient(circle at 10% 10%, #ffd6e5 0 40px, transparent 41px),
+    radial-gradient(circle at 90% 10%, #ffc4d8 0 45px, transparent 46px),
+    linear-gradient(135deg, #fff0f6, #ffdce9);
+
+  color: #87415e;
+}
+
+.container {
+  width: 96%;
+  max-width: 700px;
+  margin: auto;
+  padding: 22px;
+
+  background: #fffafb;
+  border: 4px solid #f3a7c1;
+  border-radius: 25px;
+
+  box-shadow:
+    0 7px 0 #df7fa2,
+    0 12px 25px rgba(190,100,130,.20);
+}
+
+h1 {
+  text-align: center;
+  color: #d85c89;
+  font-size: 25px;
+  margin: 0 0 18px;
+}
+
+.secao {
+  margin-bottom: 18px;
+}
+
+.secao h3 {
+  color: #d85c89;
+  font-size: 16px;
+  margin: 0 0 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #f5c4d4;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo.duplo {
+  grid-column: span 2;
+}
+
+.campo.completo {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 3px;
+  color: #984c69;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 9px 10px;
+
+  background: white;
+  color: #87415e;
+
+  border: 2px solid #f3b2c9;
+  border-radius: 10px;
+
+  font-size: 13px;
+  outline: none;
+
+  box-shadow: 0 2px 0 #f7d5e1;
+}
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+textarea {
+  min-height: 55px;
+  resize: vertical;
+}
 
-  <title>Atendimento - Sistema Hospitalar</title>
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #ed7fa5;
+}
 
-  <style>
+input[type="file"] {
+  background: #fff0f6;
+  padding: 7px;
+}
 
-    * {
-      box-sizing: border-box;
-      font-family: "Trebuchet MS", Arial, sans-serif;
-    }
+button {
+  width: 100%;
+  padding: 12px;
 
-    body {
-      margin: 0;
-      min-height: 100vh;
+  background: #f58caf;
+  color: white;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  border: 3px solid #dc6d93;
+  border-radius: 12px;
 
-      background:
-        radial-gradient(circle at 10% 15%, #ffd6e5 0 50px, transparent 51px),
-        radial-gradient(circle at 90% 12%, #ffc4d8 0 60px, transparent 61px),
-        radial-gradient(circle at 90% 90%, #ffe1ec 0 60px, transparent 61px),
-        linear-gradient(135deg, #fff0f6, #ffdce9);
+  font-size: 16px;
+  font-weight: bold;
 
-      color: #87415e;
-    }
+  cursor: pointer;
+  box-shadow: 0 4px 0 #bf5278;
+}
 
-    body::before {
-      content: "🌸  ♡  🧸  ♡  🌸";
+button:hover {
+  background: #f79bb9;
+}
 
-      position: fixed;
-      top: 20px;
-      left: 25px;
+@media (max-width: 600px) {
 
-      font-size: 25px;
-      color: #df7fa2;
-      letter-spacing: 7px;
-    }
+  .container {
+    width: 100%;
+    padding: 17px;
+  }
 
-    body::after {
-      content: "♡  🩺  ♡  🌸  ♡";
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-      position: fixed;
-      bottom: 20px;
-      right: 25px;
+  .campo.duplo,
+  .campo.completo {
+    grid-column: 1 / -1;
+  }
 
-      font-size: 25px;
-      color: #df7fa2;
-    }
+  h1 {
+    font-size: 22px;
+  }
 
+}
 
-    /* CAIXA PRINCIPAL */
-
-    .container {
-      width: 90%;
-      max-width: 500px;
-
-      padding: 35px;
-
-      background: #fffafb;
-
-      border: 5px solid #f3a7c1;
-      border-radius: 32px;
-
-      box-shadow:
-        0 10px 0 #df7fa2,
-        0 18px 35px rgba(190, 100, 130, 0.25);
-
-      position: relative;
-    }
-
-
-    /* URSINHO */
-
-    .container::before {
-      content: "🧸";
-
-      position: absolute;
-
-      top: -48px;
-      left: 30px;
-
-      width: 65px;
-      height: 65px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      background: #ffd1df;
-
-      border: 4px solid #ee91b0;
-      border-radius: 50%;
-
-      font-size: 38px;
-
-      box-shadow: 0 5px 0 #d9799b;
-    }
-
-
-    /* TÍTULO */
-
-    h2 {
-      text-align: center;
-
-      color: #d85c89;
-
-      font-size: 30px;
-
-      margin: 0 0 25px;
-
-      text-shadow: 2px 2px 0 #ffd5e3;
-    }
-
-
-    /* CAMPOS */
-
-    input,
-    select {
-
-      width: 100%;
-
-      padding: 14px 16px;
-
-      margin-bottom: 16px;
-
-      background: white;
-
-      color: #87415e;
-
-      border: 3px solid #f3b2c9;
-
-      border-radius: 17px;
-
-      font-size: 15px;
-
-      outline: none;
-
-      box-shadow: 0 4px 0 #f7d5e1;
-
-      transition: 0.2s;
-    }
-
-    input::placeholder {
-      color: #c994a9;
-    }
-
-    input:focus,
-    select:focus {
-      border-color: #ed7fa5;
-
-      transform: translateY(-2px);
-
-      box-shadow: 0 6px 0 #f2c1d2;
-    }
-
-
-    /* CAMPO DE FOTO */
-
-    input[type="file"] {
-      background: #fff0f6;
-
-      padding: 12px;
-
-      cursor: pointer;
-    }
-
-
-    /* BOTÃO */
-
-    button {
-
-      width: 100%;
-
-      padding: 16px;
-
-      background: #f58caf;
-
-      color: white;
-
-      border: 4px solid #dc6d93;
-
-      border-radius: 18px;
-
-      font-size: 18px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-      box-shadow: 0 6px 0 #bf5278;
-
-      transition: 0.15s;
-    }
-
-    button:hover {
-      background: #f79bb9;
-
-      transform: translateY(-2px);
-    }
-
-    button:active {
-      transform: translateY(4px);
-
-      box-shadow: 0 2px 0 #bf5278;
-    }
-
-
-    /* RESPONSIVO */
-
-    @media (max-width: 600px) {
-
-      .container {
-        width: 94%;
-        padding: 28px 20px;
-      }
-
-      h2 {
-        font-size: 25px;
-      }
-
-    }
-
-  </style>
-
+</style>
 </head>
 
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h2>
-      🏥 Atendimento
-    </h2>
+<h1>🏥 Atendimento Hospitalar</h1>
 
 
-    <input
-      id="nome"
-      placeholder="👤 Nome"
-    >
+<!-- PACIENTE -->
+
+<div class="secao">
+
+<h3>👤 Dados do Paciente</h3>
+
+<div class="grid">
+
+<div class="campo duplo">
+<label>Nome completo *</label>
+<input id="nome" placeholder="Nome completo">
+</div>
+
+<div class="campo">
+<label>CPF *</label>
+<input id="cpf" placeholder="000.000.000-00">
+</div>
+
+<div class="campo">
+<label>RG</label>
+<input id="rg" placeholder="RG">
+</div>
+
+<div class="campo">
+<label>Nascimento *</label>
+<input id="dataNascimento" type="date">
+</div>
+
+<div class="campo">
+<label>Sexo</label>
+<select id="sexo">
+<option value="">Selecione</option>
+<option>Feminino</option>
+<option>Masculino</option>
+<option>Outro</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Estado civil</label>
+<select id="estadoCivil">
+<option value="">Selecione</option>
+<option>Solteiro(a)</option>
+<option>Casado(a)</option>
+<option>Divorciado(a)</option>
+<option>Viúvo(a)</option>
+</select>
+</div>
+
+<div class="campo duplo">
+<label>Nome da mãe</label>
+<input id="nomeMae" placeholder="Nome da mãe">
+</div>
+
+</div>
+</div>
 
 
-    <input
-      id="cpf"
-      placeholder="🪪 CPF"
-    >
+<!-- CONTATO -->
+
+<div class="secao">
+
+<h3>📞 Contato</h3>
+
+<div class="grid">
+
+<div class="campo">
+<label>Telefone</label>
+<input id="telefone" placeholder="(00) 0000-0000">
+</div>
+
+<div class="campo">
+<label>Celular</label>
+<input id="celular" placeholder="(00) 00000-0000">
+</div>
+
+<div class="campo">
+<label>E-mail</label>
+<input id="email" type="email" placeholder="E-mail">
+</div>
+
+</div>
+</div>
 
 
-    <select id="tipo">
+<!-- ENDEREÇO -->
 
-      <option>
-        Convenio
-      </option>
+<div class="secao">
 
-      <option>
-        Particular
-      </option>
+<h3>🏠 Endereço</h3>
 
-    </select>
+<div class="grid">
+
+<div class="campo">
+<label>CEP</label>
+<input id="cep" placeholder="00000-000">
+</div>
+
+<div class="campo duplo">
+<label>Endereço</label>
+<input id="endereco" placeholder="Rua / Avenida">
+</div>
+
+<div class="campo">
+<label>Número</label>
+<input id="numero" placeholder="Nº">
+</div>
+
+<div class="campo">
+<label>Bairro</label>
+<input id="bairro" placeholder="Bairro">
+</div>
+
+<div class="campo">
+<label>Cidade</label>
+<input id="cidade" placeholder="Cidade">
+</div>
+
+<div class="campo">
+<label>Estado</label>
+<select id="estado">
+<option value="">UF</option>
+<option>AC</option>
+<option>AL</option>
+<option>AP</option>
+<option>AM</option>
+<option>BA</option>
+<option>CE</option>
+<option>DF</option>
+<option>ES</option>
+<option>GO</option>
+<option>MA</option>
+<option>MG</option>
+<option>MS</option>
+<option>MT</option>
+<option>PA</option>
+<option>PB</option>
+<option>PE</option>
+<option>PI</option>
+<option>PR</option>
+<option>RJ</option>
+<option>RN</option>
+<option>RS</option>
+<option>SC</option>
+<option>SE</option>
+<option>SP</option>
+<option>TO</option>
+</select>
+</div>
+
+</div>
+</div>
 
 
-    <input
-      type="file"
-      id="foto"
-    >
+<!-- RESPONSÁVEL -->
+
+<div class="secao">
+
+<h3>🚨 Contato de Emergência</h3>
+
+<div class="grid">
+
+<div class="campo duplo">
+<label>Responsável</label>
+<input id="responsavel" placeholder="Nome do responsável">
+</div>
+
+<div class="campo">
+<label>Parentesco</label>
+<select id="parentesco">
+<option value="">Selecione</option>
+<option>Mãe</option>
+<option>Pai</option>
+<option>Cônjuge</option>
+<option>Filho(a)</option>
+<option>Irmão(ã)</option>
+<option>Outro</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Telefone</label>
+<input id="telefoneEmergencia" placeholder="Telefone">
+</div>
+
+</div>
+</div>
 
 
-    <button onclick="cadastrar()">
-      🌸 Cadastrar
-    </button>
+<!-- ATENDIMENTO -->
 
-  </div>
+<div class="secao">
+
+<h3>🩺 Atendimento</h3>
+
+<div class="grid">
+
+<div class="campo">
+<label>Tipo *</label>
+<select id="tipoAtendimento">
+<option value="">Selecione</option>
+<option>Consulta</option>
+<option>Pronto Atendimento</option>
+<option>Emergência</option>
+<option>Internação</option>
+<option>Exame</option>
+<option>Retorno</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Especialidade</label>
+<select id="especialidade">
+<option value="">Selecione</option>
+<option>Clínica Geral</option>
+<option>Cardiologia</option>
+<option>Dermatologia</option>
+<option>Ginecologia</option>
+<option>Ortopedia</option>
+<option>Pediatria</option>
+<option>Neurologia</option>
+<option>Oftalmologia</option>
+<option>Urologia</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Prioridade</label>
+<select id="prioridade">
+<option>Normal</option>
+<option>Baixa</option>
+<option>Moderada</option>
+<option>Alta</option>
+<option>Emergência</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Data</label>
+<input id="dataAtendimento" type="date">
+</div>
+
+<div class="campo duplo">
+<label>Convênio</label>
+<input id="convenio" placeholder="Nome do convênio">
+</div>
+
+<div class="campo">
+<label>Carteirinha</label>
+<input id="carteirinha" placeholder="Número">
+</div>
+
+<div class="campo completo">
+<label>Motivo / Queixa principal</label>
+<textarea id="queixa" placeholder="Descreva o motivo do atendimento"></textarea>
+</div>
+
+<div class="campo completo">
+<label>Observações</label>
+<textarea id="observacoes" placeholder="Informações adicionais"></textarea>
+</div>
+
+</div>
+</div>
 
 
-  <script>
+<!-- FOTO -->
 
-    function cadastrar() {
+<div class="secao">
 
-      fetch("http://localhost:3000/atendimento", {
+<h3>📷 Identificação</h3>
 
+<input
+  type="file"
+  id="foto"
+  accept="image/*"
+>
+
+</div>
+
+
+<button onclick="cadastrar()">
+🌸 Cadastrar Paciente
+</button>
+
+</div>
+
+
+<script>
+
+async function cadastrar() {
+
+  const dados = {
+
+    nome: document.getElementById("nome").value,
+    cpf: document.getElementById("cpf").value,
+    rg: document.getElementById("rg").value,
+
+    dataNascimento:
+      document.getElementById("dataNascimento").value,
+
+    sexo:
+      document.getElementById("sexo").value,
+
+    estadoCivil:
+      document.getElementById("estadoCivil").value,
+
+    nomeMae:
+      document.getElementById("nomeMae").value,
+
+    telefone:
+      document.getElementById("telefone").value,
+
+    celular:
+      document.getElementById("celular").value,
+
+    email:
+      document.getElementById("email").value,
+
+    cep:
+      document.getElementById("cep").value,
+
+    endereco:
+      document.getElementById("endereco").value,
+
+    numero:
+      document.getElementById("numero").value,
+
+    bairro:
+      document.getElementById("bairro").value,
+
+    cidade:
+      document.getElementById("cidade").value,
+
+    estado:
+      document.getElementById("estado").value,
+
+    responsavel:
+      document.getElementById("responsavel").value,
+
+    parentesco:
+      document.getElementById("parentesco").value,
+
+    telefoneEmergencia:
+      document.getElementById("telefoneEmergencia").value,
+
+    tipoAtendimento:
+      document.getElementById("tipoAtendimento").value,
+
+    especialidade:
+      document.getElementById("especialidade").value,
+
+    prioridade:
+      document.getElementById("prioridade").value,
+
+    dataAtendimento:
+      document.getElementById("dataAtendimento").value,
+
+    convenio:
+      document.getElementById("convenio").value,
+
+    carteirinha:
+      document.getElementById("carteirinha").value,
+
+    queixa:
+      document.getElementById("queixa").value,
+
+    observacoes:
+      document.getElementById("observacoes").value
+  };
+
+
+  if (!dados.nome || !dados.cpf || !dados.dataNascimento) {
+
+    alert("💗 Preencha os campos obrigatórios!");
+
+    return;
+  }
+
+
+  try {
+
+    const resposta = await fetch(
+      "http://localhost:3000/atendimento",
+      {
         method: "POST",
 
         headers: {
           "Content-Type": "application/json"
         },
 
-        body: JSON.stringify({
+        body: JSON.stringify(dados)
+      }
+    );
 
-          nome: nome.value,
 
-          cpf: cpf.value,
-
-          tipo: tipo.value
-
-        })
-
-      });
-
-      alert(
-        "💗 Paciente enviado para triagem!"
-      );
-
+    if (!resposta.ok) {
+      throw new Error("Erro no cadastro");
     }
 
-  </script>
+
+    alert(
+      "💗 Paciente cadastrado com sucesso!"
+    );
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    alert(
+      "❌ Não foi possível conectar ao servidor."
+    );
+
+  }
+
+}
+
+</script>
 
 </body>
-
 </html>
