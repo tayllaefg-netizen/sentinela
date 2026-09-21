@@ -621,6 +621,14 @@
 
   </div>
 
+<button
+  class="btn-alta"
+  onclick="abrirAlta(${index})">
+
+  📄 Alta Médica
+
+</button>
+
 
 
   <!-- CONSULTÓRIO -->
@@ -952,6 +960,19 @@ function selecionar(index) {
     );
 
   }
+
+}
+
+  function abrirAlta(index) {
+
+  const paciente = triagensCarregadas[index];
+
+  localStorage.setItem(
+    "pacienteAlta",
+    JSON.stringify(paciente)
+  );
+
+  window.location.href = "alta.html";
 
 }
 
