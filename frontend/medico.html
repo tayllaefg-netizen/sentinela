@@ -408,28 +408,6 @@
       transform: translateY(-2px);
     }
 
-    .btn-alta {
-
-  background: #caa7ee;
-
-  color: white;
-
-  border: 3px solid #9870bd;
-
-  padding: 9px 15px;
-
-  border-radius: 13px;
-
-  box-shadow: 0 4px 0 #9870bd;
-}
-
-.btn-alta:hover {
-
-  background: #d6baf3;
-
-  transform: translateY(-2px);
-}
-
 
     /* =========================================
        FORMULÁRIO DE CONSULTA
@@ -620,14 +598,6 @@
     </button>
 
   </div>
-
-<button
-  class="btn-alta"
-  onclick="abrirAlta(${index})">
-
-  📄 Alta Médica
-
-</button>
 
 
 
@@ -960,19 +930,6 @@ function selecionar(index) {
     );
 
   }
-
-}
-
-  function abrirAlta(index) {
-
-  const paciente = triagensCarregadas[index];
-
-  localStorage.setItem(
-    "pacienteAlta",
-    JSON.stringify(paciente)
-  );
-
-  window.location.href = "alta.html";
 
 }
 
